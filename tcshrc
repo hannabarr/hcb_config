@@ -1,0 +1,109 @@
+alias esplg01 ssh -X esp@esplg01
+alias esplg02 ssh -X esp@esplg02
+alias esplg03 ssh -X esp@esplg03
+alias esplg04 ssh -X esp@esplg04
+
+alias espco02 ssh -X esp@espco02
+alias espva02 ssh -X esp@espva02
+alias espaz01 ssh -X esp@espaz01
+alias esp2az-01 ssh -X esp@esp2az-01
+
+alias esp3co ssh -X esp@esp3co
+alias esp3va ssh -X esp@esp3va
+alias esp3az ssh -X esp@esp3az
+alias cho ssh -p2223 -X esp@50.234.203.38
+alias choe2s2 ssh -p2222 -X root@50.234.203.38
+
+alias ssh ssh -X
+
+# Use vimx instead of vim for clipboard access
+if (-e /usr/bin/vimx) alias vim '/usr/bin/vimx'
+
+#alias windows xfreerdp -u hcb -d rinconres -g 1800x1000 bwsazrds
+#alias windows xfreerdp -u hcb -d rinconres -g 1800x1000 bwscords
+#alias windows xfreerdp --plugin cliprdr -u hcb -d rinconres -g 1800x1000 bwscords
+alias windows xfreerdp --plugin cliprdr -u hcb -d rinconres -g 1900x990 bwscords
+
+alias windowsSTK xfreerdp -u hcb -d rinconres -g 1800x1000 bw2k8cofds
+
+alias vnc vncviewer -Shared
+
+alias esp_ops source /home/hcb/esp_ops/bin/activate.csh; setenv PATH $PATH\:/home/hcb/esp_ops/bin
+#alias maclearn source /home/hcb/maclearn/bin/activate.csh; setenv PATH $PATH\:/home/hcb/maclearn/bin
+
+# Print date string for camo mattermost logging
+alias datec date -u +'%Y/%m/%d\ %H:%M:%S'
+
+setenv PATH $PATH\:/home/hcb/bin\:.\:/home/hcb/bluetools/bin\:/home/hcb/bin/camo
+#setenv PATH /warehouse/anaconda/anaconda-5.1/python-2.7/x64/bin:${PATH}
+alias python3 /warehouse/anaconda/latest/python-3.7/bin/python
+
+setenv TERM "screen-256color"
+
+# setenv BOOSTROOTLIB "/usr/include/boost"
+setenv BOOSTROOTLIB "/home/hcb/boost_1_72_0"
+
+setenv PYTHONPATH /home/hcb/
+
+
+setenv XMDISK /xmidas/rhel7/xm-4_16_1
+alias xmstart "source $XMDISK/xm/unix/xmstart"
+setenv XMHISTORY_DIR /home/hcb/xm_history
+
+
+set     red="%{\033[1;31m%}"
+set   green="%{\033[0;32m%}"
+set  yellow="%{\033[0;33m%}"
+set    blue="%{\033[1;34m%}"
+set magenta="%{\033[1;35m%}"
+set    cyan="%{\033[0;36m%}"
+set   white="%{\033[0;37m%}"
+set     end="%{\033[0m%}"
+
+if(`hostname` == 'blcocuda.rinconres.com') then
+    setenv PATH $PATH\:/usr/local/cuda/bin
+    setenv LD_LIBRARY_PATH /usr/local/cuda/targets/x86_64-linux/lib
+endif
+
+if ( $?prompt ) then
+
+  # interactive shell
+
+  # Set a more informative prompt
+  # "hostname{command#}working_pathname> "
+  # set prompt = "`hostname`{\!}`pwd`> "
+  # set prompt = "${magenta}%n${end}@${yellow}`hostname | sed 's/\..*//'`${end}:${cyan}%c3${end}$ "
+  set prompt = "${blue}`hostname | sed 's/\..*//'`${end}:${cyan}%c3${end}$ "
+  # alias cd 'cd \!* >/dev/null ; set prompt = "`hostname`{\!}`pwd`> "'
+
+  # Most users like these shell settings.  Comment them out if you do not.
+  set history = 200
+  #set noclobber
+  set notify
+  set filec
+  set ignoreeof
+  set cdpath = (~)
+
+  alias ll 'ls -ltrhs --color'
+  alias lt 'll|tail'
+
+endif
+
+# Tmux shortcuts
+alias tl 'tmux ls'
+alias ta 'tmux a -t'
+
+# Pytest for camo_backend
+alias pytest 'pytest --ignore=externals --ignore=messaging'
+
+# Run SQL from commandline using jrh's fancy script
+setenv SQL_CONFIG 'postgres -U esp -p 5432 -h esplg02'
+setenv SQL_CONFIG_PRE 'SET search_path TO camo;'
+# setenv SQL_CONFIG 'postgres -p 27482 -h localhost'
+# setenv SQL_CONFIG_PRE 'SET search_path TO test_schema;'
+
+# Git shortcuts
+alias gpo 'git push origin'
+
+setenv HISTTIMEFORMAT "%d/%m/%y %T"
+setenv MASTER "/home/hcb/projects/camo/master"
